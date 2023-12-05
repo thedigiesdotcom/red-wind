@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Red Wind by Raymond Chandler</title>
+    <style>
+      .intro1 {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 35px;
+        font-weight: 700;
+        text-align: center;
+      }
+      .intro2 {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 30px;
+        font-weight: 700px;
+        font-style: italic;
+        text-align: center;
+        margin-top: auto;
+      }
+      h1 {
+        color: #c00000;
+        text-align: center;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 70px;
+        padding: none;
+        margin-top: auto;
+        margin-bottom: 5px;
+        text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+      }
+      h2 {
+        color: #c00000;
+        text-align: center;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 35px;
+        margin-top: auto;
+        text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+        max-width: 90%;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+      }
+      body {
+        font-family: "Courier New", Courier, monospace;
+        font-style: normal;
+        font-size: 25px;
+        font-weight: 700;
+        color: primary;
+        line-height: 1.5;
+        background-color: #c00000;
+      }
+      header {
+        max-width: 1000px;
+        text-align: center;
+        font-size: 50px;
+      }
+
+      footer {
+        max-width: 1000px;
+        text-align: center;
+      }
+
+      section {
+        padding: 70px 0 70px 0;
+      }
+      span:not(.prompt) {
+        float: left;
+        line-height: 85%;
+        width: 0.7em;
+        font-size: 400%;
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      section.demo-container {
+        background-color: lightgoldenrodyellow;
+        display: block;
+        margin: 60px auto;
+        min-width: 300px;
+        max-width: 800px;
+        padding: 20px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+      }
+      .text-outside-box {
+        text-align: center;
+      }
+      .pdf-book {
+        display: block;
+        margin-top: 10px;
+        color: #c00000;
+      }
+      .pdf-book:hover {
+        text-decoration: none;
+        color: blue;
+      }
+      .source-code-toggle {
+        display: block;
+        margin-top: 10px;
+        color: #c00000;
+      }
+      .source-code-toggle:hover {
+        text-decoration: none;
+        color: blue;
+      }
+
+      .muted {
+        color: muted;
+
+        a {
+          color: darken(mistyrose, 10%);
+          text-decoration: none;
+        }
+      }
+
+      .visible {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        margin-top: 30px;
+      }
+
+      .book-switch {
+        width: auto;
+        display: inline-block;
+        position: relative;
+        margin: 30px 0px 20px 0px;
+
+        .prompt {
+          display: inline-block;
+          margin-top: 10px;
+        }
+
+        .well {
+          background: white;
+          height: 20px;
+          width: 65px;
+          position: absolute;
+          right: 50px;
+          top: 7px;
+          border-radius: 10px;
+          box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.3);
+          border: 1px solid lighten($primary, 21%);
+          cursor: pointer;
+        }
+
+        #toggle {
+          opacity: 0;
+          border: 1px;
+          border-radius: 0;
+          outline: none;
+          appearance: none;
+
+          height: 30px;
+          width: 140px;
+          background: transparent;
+          position: absolute;
+          right: 0px;
+          top: 3px;
+          cursor: pointer;
+          z-index: 100;
+          color: tranparent;
+
+          &:after {
+            content: "";
+            background-color: transparent;
+            height: 40px;
+            width: 90px;
+            position: absolute;
+            left: 30px;
+            top: -5px;
+          }
+
+          ~ div.book:before {
+            content: "\1F4D5";
+            position: absolute;
+            right: 70px;
+            top: -10px;
+            font-size: 40px;
+            z-index: 1;
+            color: primary;
+
+            -moz-transition: all 0.25s ease-out;
+            -webkit-transition: all 0.25s ease-out;
+            -o-transition: all 0.25s ease-out;
+            transition: all 0.25s ease-out;
+          }
+
+          &:checked {
+            right: 0px;
+
+            &:after {
+              left: -80px;
+            }
+
+            ~ div.book:before {
+              content: "\1F4D6";
+              top: -10px;
+              right: 41px;
+            }
+
+            ~ div.visible {
+              opacity: 1;
+              max-height: 900px;
+              overflow: visible;
+            }
+          }
+
+          ~ label {
+            &:before {
+              content: "No";
+              position: absolute;
+              color: primary;
+              left: -30px;
+              top: 0px;
+              font-size: 16px;
+            }
+
+            &:after {
+              content: "Yes";
+              position: absolute;
+              color: muted;
+              left: 83px;
+              top: 0px;
+              font-size: 16px;
+            }
+          }
+
+          &:checked ~ label {
+            &:before {
+              color: muted;
+            }
+            &:after {
+              color: primary;
+            }
+          }
+        }
+      }
+      button {
+        display: block;
+        margin: 0 auto;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 25px;
+        font-weight: 700;
+        color: white;
+        background: #c00000;
+        border-radius: 35px;
+        padding: 20px 30px;
+        border: none;
+        letter-spacing: 1.5px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+      }
+      button:hover {
+        background-color: lightgoldenrodyellow;
+        color: black;
+        border-color: black;
+        border: 5px;
+      }
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 0px 50px 0px;
+        background-attachment: scroll;
+        background-color: rgba(255, 255, 255);
+        box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+      }
+      // delete the following line if no text is used
+      // edit the line if you wanna use other fonts
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+
+      // use only the available space inside the 400x400 frame
+      .frame {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 400px;
+        margin-top: -200px;
+        margin-left: -200px;
+        border-radius: 2px;
+        box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        background-color: #8ec5fc;
+        background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
+
+        color: #333;
+        font-family: "Open Sans", Helvetica, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .center {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .line {
+        fill: none;
+        stroke-width: 30px;
+        opacity: 0.1;
+        stroke-linecap: round;
+        -webkit-animation: line 3s linear infinite;
+        animation: line 3s linear infinite;
+      }
+
+      .circle {
+        z-index: 10;
+        position: absolute;
+        border: 2px solid #cc0000;
+        width: 50px;
+        top: 210px;
+        left: 120px;
+        height: 50px;
+        border-radius: 50%;
+        -webkit-animation: circle 3.1s ease-out infinite both;
+        animation: circle 3.1s ease-out infinite both;
+      }
+
+      @-webkit-keyframes line {
+        from {
+          stroke-dasharray: 100 660;
+          stroke-dashoffset: 780;
+        }
+        to {
+          stroke-dasharray: 100 660;
+          stroke-dashoffset: 70;
+        }
+      }
+      @keyframes line {
+        from {
+          stroke-dasharray: 100 1200;
+          stroke-dashoffset: 1300;
+        }
+        to {
+          stroke-dasharray: 100 1200;
+          stroke-dashoffset: 10;
+        }
+      }
+
+      @-webkit-keyframes circle {
+        0%,
+        50% {
+          opacity: 1;
+          transform: scale(0);
+        }
+        70%,
+        100% {
+          opacity: 0;
+          transform: scale(0.2);
+        }
+      }
+      @keyframes circle {
+        0%,
+        50% {
+          opacity: 1;
+          transform: scale(0);
+        }
+        70%,
+        100% {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <header>RC Publishing House</header>
+      <section>
+        <p class="intro2">proudly presents</p>
+
+        <div class="container">
+          <h1>Red Wind</h1>
+          <h2>by Raymond Chandler</h2>
+        </div>
+        <img
+          src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/084/496/original/Phil_Marlow.jpg?1685945985"
+          alt="Raymond Chandler"
+        />
+        <section class="demo-container">
+          <div class="book-switch">
+            <input type="checkbox" id="toggle" tabindex="1" />
+            <div class="book"></div>
+            <label for="toggle" class="well"></label>
+            <span class="prompt">Fancy a taster? </span>
+            <br />
+            <div class="visible">
+              <br />
+              <p>
+                <span>T</span>here was a desert wind blowing that night. It was
+                one of those hot dry Santa Anas that come down through the
+                mountain passes and curl your hair and make your nerves jump and
+                your skin itch. On nights like that every booze party ends in a
+                fight. Meek little wifes feel the edge of the carving knife and
+                study their husbands' necks. Anything can happen. You can even
+                get a full glass of beer at a cocktail lounge.
+                <br />
+                <a
+                  href="https://delong.typepad.com/files/red-wind.pdf"
+                  target="blank"
+                  class="pdf-book"
+                  ><br />
+                  Read more</a
+                >
+              </p>
+            </div>
+          </div>
+        </section>
+        <br />
+        <button>BUY BOOK</button>
+        <br />
+        <br />
+      </section>
+      <footer>Coded by Ivet @RC</footer>
+    </div>
+    <script>
+      function buy() {
+        let name = prompt("Introduction time. Thy name?");
+        let email = prompt("Email address?");
+        let club = prompt(
+          "Would you like to join our secret club of wisecracking, hard-drinking, tough private eyes?"
+        );
+
+        if (club === "Yes" || club === "yes") {
+          alert(
+            "Great choice, " +
+              name +
+              "! Information about our secret joining ritual is on its way to you. Please do not share it with anyone!"
+          );
+        }
+        if (club === "No" || club === "no") {
+          alert("Lovely. Bye!");
+        }
+        alert();
+      }
+      let button = document.querySelector("button");
+      button.addEventListener("click", buy);
+    </script>
+  </body>
+</html>
